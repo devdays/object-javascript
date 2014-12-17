@@ -1,0 +1,29 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <title>Global Name Collision</title>
+</head>
+<body>
+<pre>
+<script type="text/javascript">
+    var two;
+    two = 2;
+    three = 3;
+
+    incrementValues();
+
+    document.write("two after increment = " + two + "\n");
+    document.write("three after increment = " + three + "\n");
+
+    function incrementValues() {
+        var two;
+        two = 2 + 1;
+        three = 3 + 1;
+
+        document.write("incremented two = " + two + "\n");
+        document.write("incremented three = " + three + "\n\n");
+    }
+</script>
+</pre>
+</body>
+</html>

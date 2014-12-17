@@ -1,0 +1,44 @@
+﻿<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title>Sammy loads Mustache Template</title>
+    <!-- http://sammyjs.org/docs/api/0.7.4/all#Sammy.Mustache -->
+    <!-- this throws an error.. body404 hmmmm -->
+</head>
+<body>
+    <h3>Default Header</h3>
+    <p><a href="#/hello/Bruce">Hello Bruce</a></p>
+    <div id="appElement"></div>
+
+<script src="Scripts/jquery-2.0.2.js"></script>
+<script src="Scripts/mustache.js"></script>
+<script src="Scripts/sammy-0.7.4.js"></script>
+<script src="Scripts/sammy.mustache.js"></script>
+<script>
+    var app = $.sammy(function () {
+        // include the plugin and alias mustache() to ms()
+        this.use('Mustache', 'ms');
+
+        // to see this you will need to go to
+        // yourpage#/hello/AName
+        this.get('#/hello/:name', function () {
+            var data = {};
+            // set local vars
+            data.title = 'Hello Title';
+            data.name = this.params.name;
+            console.log("data.title=" + this.title + " data.name=" + this.name);
+
+            // where the template will be applied
+           // $element("#appElement");
+            // render the template and pass it through mustache
+            this.partial('5-helloTemplate.ms', data);
+        });
+    });
+
+    $(function () {
+        app.run()
+    });
+
+</script>
+</body>
+</html>

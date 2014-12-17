@@ -1,0 +1,22 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <title>Simple RequireJS Sample</title>
+    <script  src="scripts/require.js"></script>
+    <script>
+        requirejs.config({
+            //By default load any module IDs from Scripts folder
+            baseUrl: 'Scripts'
+        });
+        // load the discount.js and use that module to calculate employee discount
+        require(['discount'],
+            function (discount) {
+                var d = discount.calculateDiscount('employee');
+                document.write('employee discount is ' + d + '%');
+            });
+    </script>
+</head>
+<body>
+
+</body>
+</html>

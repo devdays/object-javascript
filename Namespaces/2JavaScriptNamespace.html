@@ -1,0 +1,33 @@
+﻿<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title>Namespace Demo 1</title>
+    <script type="text/javascript">
+        var Bookstore = Bookstore || {};
+
+        Bookstore.Book = function () {
+            this.title = 'My Awesome Fiction';
+            this.description = 'An awesome fictional story.';
+            this.link = 'http://nextechu.com';
+        };
+
+        Bookstore.Book.prototype.toString = function () {
+            return 'Title: ' + this.title;
+        }
+    </script>
+</head>
+<body>
+<div id="book1title" />
+<div id="book2title" />
+    <script type="text/javascript">
+        var book1 = new Bookstore.Book();
+        book1title.innerText = book1.toString();
+
+        var book2 = new Bookstore.Book();
+        book2.title = "Awesome Fiction Returns";
+        book2.description = "An even more awesome fictional story.";
+        book2title.innerText = book2.toString();
+    </script>
+
+</body>
+</html>

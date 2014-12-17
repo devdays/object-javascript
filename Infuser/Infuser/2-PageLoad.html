@@ -1,0 +1,49 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <title>Infuser Page Load</title>
+</head>
+<body>
+    <div>
+        <input id="btnTemplate" type="button" value="Say Hello!">
+        <span id="msg"></span>
+    </div>
+    <div id="target"></div>
+
+    <script src="Scripts/jquery-2.0.0.js"></script>
+    <script src="Scripts/TrafficCop.js"></script>
+    <script src="Scripts/infuser.js"></script>
+
+    <script>
+        var toggled = false;
+        $(function () {
+            // pre-loading image for our custom "loading template"
+            var loadingImg = $('<img />').attr('src', './images/ajax-loader.gif'),
+                origRender = infuser.defaults.render;
+
+            $('#btnTemplate').click(function () {
+                infuser.defaults.templateUrl = "./templates";
+                infuser.defaults.loadingTemplate.content =
+                    "<div class='infuser-loading'>" +
+                    "<img src='./images/ajax-loader.gif'>Loading...</div>"
+                infuser.defaults.loadingTemplate.transitionOut = function () { };
+                infuser.infuse("Hello", {
+                    target: "#target",
+                    render: function (target, template) {
+                        // really ugly way to simulate long running template retrieval
+                        setTimeout(function () {
+                            origRender(target, template);
+                        }, 4000);
+                    },
+                    postRender: function (target) {
+                        if (!toggled) {
+                            $("#msg").text("Click uses a locally cached template");
+                        }
+                    }
+                });
+            });
+        });
+    </script>
+
+</body>
+</html>

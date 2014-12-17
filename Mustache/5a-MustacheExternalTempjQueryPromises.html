@@ -1,0 +1,72 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <title>jQuery loads External Mustache Template</title>
+</head>
+<body>
+    <h3>Default Header</h3>
+    <div id="products"></div>
+
+    <script src="Scripts/jquery-2.0.2.js"></script>
+    <script src="Scripts/mustache.js"></script>
+
+    <script>
+        var productsData, productHtml;
+
+        function loadJSON() {
+            var jsonPromise = $.getJSON(
+                'data/products2.txt', function (data) {
+                    productsData = data;
+                    console.log("loadJSON" + JSON.stringify(productsData));
+                });
+            return jsonPromise;
+        }
+
+        function loadTemplate() {
+            var templatePromise =
+                $.get('templates/productsList.mustache.html',
+                function (template) {
+                    productHtml = template;
+                    console.log("loadTemplate" + productHtml);
+                });
+            return templatePromise;
+        }
+
+        function doLongFunction() {
+            var deferred = $.Deferred();
+
+            setTimeout(function () {
+                deferred.resolve();
+            }, 2000);
+
+            return deferred.promise();
+        }
+
+        function renderTemplate(selector, template, data) {
+            var renderedHtml = Mustache.render(template, productsData);
+            $(selector).append(renderedHtml);
+        }
+
+        $(document).ready(function () {
+            $('#products').html('waiting...');
+
+            $.when(
+                loadJSON(),
+                loadTemplate(),
+                // add more data and templates as needed
+                doLongFunction()
+           )
+           .done(function () {
+               console.log("loaded");;
+               $('#products').html('');
+               renderTemplate('#products', productHtml, productsData);
+               // render each set of teamplates
+          })
+          .fail(function () {
+              $('#products').html('loading something failed');
+          console.log('I fire if one or more requests failed.');
+        });
+    });
+    </script>
+</body>
+</html>

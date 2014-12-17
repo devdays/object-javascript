@@ -1,0 +1,36 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <title>Binding List to Template</title>
+</head>
+<body>
+    <h2>Products</h2>
+    <table id="target"
+        data-bind="template: { name: 'producttemplate', foreach: productArray }">
+    </table>
+
+    <script src="Scripts/jquery-2.0.0.js"></script>
+    <script src="Scripts/knockout-2.2.1.debug.js"></script>
+    <script src="Scripts/TrafficCop.js"></script>
+    <script src="Scripts/infuser.js"></script>
+    <script src="Scripts/koExternalTemplateEngine.js"></script>
+
+    <script type="text/javascript">
+
+        $(function () {
+            //infuser.defaults.templateUrl = "./templates";
+
+            function ViewModel() {
+                this.productArray = ko.observableArray([
+                    { product: "Widget", type: "Tool" },
+                    { product: "Bolt", type: "Fastener" },
+                    { product: "Washer", type: "Fastener" },
+                    { product: "Screwdriver", type: "Tool" }
+                ]);
+            }
+
+            ko.applyBindings(new ViewModel());
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,39 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <title></title>
+</head>
+<body>
+    <div class="main-content">
+        <h1>Stores</h1>
+        <div id="sampleArea"></div>
+    </div>
+
+    <script id="storesTmpl" type="text/template">
+        <ul>
+            {{#stores}}
+            Nothing shown here
+            {{/stores}}
+            {{^stores}}
+            No stores open.
+            {{/stores}}
+        </ul>
+    </script>
+    <script src="Scripts/jquery-2.0.2.min.js"></script>
+    <script src="Scripts/mustache.js"></script>
+    <script>
+        var data = {};
+        $.getJSON(
+            "Data/stores.txt",
+            function (d) {
+                console.log(JSON.stringify(d));
+                data = d;
+                var template = $("#storesTmpl").html();
+                var html = Mustache.to_html(template, data);
+                $('#sampleArea').html(html);
+            }
+        );
+    </script>
+</body>
+</html>
+

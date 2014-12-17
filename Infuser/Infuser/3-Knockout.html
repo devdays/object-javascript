@@ -1,0 +1,36 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <title>Binding List to Template</title>
+</head>
+<body>
+    <h2>Products</h2>
+
+    <table id="target"
+        data-bind="template: { name: 'product-template', foreach: productArray }">
+    </table>
+
+    <script type="text/html" id="product-template">
+        <tr>
+            <td data-bind="text: product"></td>
+            <td data-bind="text: type"></td>
+        </tr>
+    </script>
+
+
+    <script src="Scripts/knockout-2.2.1.debug.js"></script>
+
+    <script type="text/javascript">
+        function ViewModel() {
+            this.productArray = ko.observableArray([
+                { product: "Widget", type: "Tool" },
+                { product: "Bolt", type: "Fastener" },
+                { product: "Washer", type: "Fastener" },
+                { product: "Screwdriver", type: "Tool" }
+            ]);
+        }
+
+        ko.applyBindings(new ViewModel());
+    </script>
+</body>
+</html>

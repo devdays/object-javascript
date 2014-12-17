@@ -1,0 +1,43 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <title></title>
+</head>
+<body>
+        <div class="main-content">
+        <div>
+            <h1>All Products</h1>
+            <ul id="products"></ul>
+        </div>
+            </div>
+    <div id="sampleArea"></div>
+    <script src="Scripts/jquery-2.0.2.min.js"></script>
+    <script src="Scripts/moment.min.js"></script>
+    <script src="Scripts/mustache.js"></script>
+    <script>
+        var data = {
+            products: [
+            {
+                id: 1,
+                name: "Toy1",
+                category: "Toy",
+                price: 45.03
+            },
+            {
+                id: 1,
+                name: "Toy2",
+                category: "Toy",
+                price: 35.20
+            }
+            ]
+        };
+        console.log(JSON.stringify(data));
+        var template = "Products:<ul>{{#products}}" +
+                                    "<li>{{name}} {{category}} {{price}}</li>" +
+                                    "{{/products}}</ul>";
+        var html = Mustache.to_html(template, data);
+        $('#sampleArea').html(html);
+
+    </script>
+</body>
+</html>

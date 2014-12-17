@@ -1,0 +1,28 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <title>jQuery loads External Mustache Template</title>
+</head>
+<body>
+    <h3>Default Header</h3>
+    <div id="products"></div>
+
+    <script src="Scripts/jquery-2.0.2.js"></script>
+    <script src="Scripts/mustache.js"></script>
+
+    <script>
+
+        $(document).ready(function () {
+            $.getJSON(
+                'data/products2.txt', {},
+                function (productsData, textStatus, jqXHr) {
+                    $.get('templates/productsList.mustache.html',
+                        function (template, textStatus, jqXhr) {
+                            var productHtml = Mustache.render(template, productsData);
+                            $('#products').append(productHtml);
+                        });
+                });
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,35 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <title></title>
+</head>
+<body>
+    <div class="main-content">
+        <h1>All Products</h1>
+        <div id="sampleArea"></div>
+    </div>
+
+    <script id="productTmpl" type="text/template">
+        Products:
+        <ul>
+            {{#products}}
+            <li>{{name}} {{category}} {{price}}</li>
+            {{/products}}
+        </ul>
+    </script>
+    <script src="Scripts/jquery-2.0.2.min.js"></script>
+    <script src="Scripts/mustache.js"></script>
+    <script>
+        var data = {};
+        $.getJSON(
+            "Data/products.txt",
+            function (d) {
+                data = d;
+                var template = $("#productTmpl").html();
+                var html = Mustache.to_html(template, data);
+                $('#sampleArea').html(html);
+            }
+        );
+    </script>
+</body>
+</html>

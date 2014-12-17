@@ -1,0 +1,35 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <title>Basic Example</title>
+</head>
+<body>
+    <p>Try this in Chrome, while watching requests on the "Network" tab of the developer tools.</p>
+    <div>
+        <input id="btnTemplate" type="button" value="Say Hello!">
+        <span id="msg"></span>
+    </div>
+    <div id="target"></div>
+
+    <script src="Scripts/jquery-2.0.0.js"></script>
+    <script src="Scripts/TrafficCop.js"></script>
+    <script src="Scripts/infuser.js"></script>
+    <script>
+        var toggled = false;
+
+        $(function () {
+            $('#btnTemplate').click(function () {
+                infuser.defaults.templateUrl = "./Templates",
+                infuser.get("Hello", function (template) {
+                    var target = $("#target");
+                    target.hide().children().remove();
+                    target.append($(template)).fadeIn();
+                    if (!toggled) {
+                        $("#msg").text("The next click will use the locally cached template");
+                    }
+                })
+            });
+        });
+    </script>
+</body>
+</html>
