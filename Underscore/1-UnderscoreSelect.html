@@ -1,0 +1,25 @@
+﻿<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title>Underscore Select</title>
+</head>
+<body>
+    <script src="Scripts/underscore.js"></script>
+    <script src="Scripts/jquery-2.0.3.js"></script>
+    <script>
+$.getJSON('Data/products.txt', function (data) {
+    var products = data.products;
+    console.log("products: " + JSON.stringify(products));
+
+    var expensiveProducts = _.select(products, function (product) {
+        // underscore walks through each product for the comparison
+        console.log("product " + JSON.stringify(product));
+        return product.price > 40;
+    });
+
+    console.log("expensiveProducts: " + JSON.stringify(expensiveProducts));
+           
+});
+    </script>
+</body>
+</html>

@@ -1,0 +1,39 @@
+﻿{
+    "products": [
+        {
+            "id": 1,
+            "name": "Squirt gun",
+            "category": "Toy",
+            "price": 45.05,
+            "description": "<p>This is a <strong>squirt</strong> gun. Shoots water.</p>"
+        },
+        {
+            "id": 2,
+            "name": "Action figure",
+            "category": "Toy",
+            "price": 35.96,
+            "description": "<p>This is an extraordinary action figure.</p>"
+        },
+        {
+            "id": 3,
+            "name": "Doll",
+            "category": "Toy",
+            "price": 55.68,
+            "description": "<p>This is a doll for your doll house.</p>"
+        },
+		{
+            "id": 4,
+            "name": "Lettuce",
+            "category": "Grocery",
+            "price": 3.49,
+            "description": "<p>This is a vegetable.</p>"
+        },
+		{
+            "id": 5,
+            "name": "Squirt of lettuce",
+            "category": "Grocery",
+            "price": 5.49,
+            "description": "<p>This is a test item.</p>"
+        }
+    ]
+}

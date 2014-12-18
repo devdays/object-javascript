@@ -1,0 +1,72 @@
+﻿<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title>Getting a Sorted List of Words</title>
+    <link href="Content/themes/base/jquery-ui.css" rel="stylesheet" />
+</head>
+<body>
+    <!-- http://jqueryui.com/autocomplete/#categories -->
+    <div class="ui-widget">
+        <label for="tags">Product: </label>
+        <input id="tags" />
+    </div>
+    <p>Type "sq" or "ac"</p>
+
+    <script src="Scripts/underscore.js"></script>
+    <script src="Scripts/jquery-2.0.3.js"></script>
+    <script src="Scripts/jquery-ui-1.10.3.js"></script>
+    <script>
+        var sortUniqWords = [];
+        $.getJSON('Data/products.txt', function (data) {
+            var products = data.products;
+            var nameWords = [];
+            var words = _.each(products, function (product) {
+
+                // get a list of names for the products
+                var nameWordsArray = product.name.match(/\w+/g);
+                _.each(nameWordsArray, function (word) {
+                    nameWords.push(word);
+                });
+
+                // make the list alphabetical of unique words
+                //var descWords = stripTags(product.description);
+                //console.log("descWords: " + JSON.stringify(descWords));
+                //var descriptionWords = descWords.split(" ");
+                //console.log("descriptionWords: " + JSON.stringify(descriptionWords));
+            });
+            
+            var sortedNameWords = nameWords.sort(function (a, b) {
+                return compareIgnoringCase(a, b);
+            });
+            var uniqNameWords = _.uniq(sortedNameWords, true, function (word) {
+                return word.toLowerCase();
+            });
+            sortUniqWords = _.without(uniqNameWords,
+                // http://en.wikipedia.org/wiki/List_of_English_prepositions
+                "a", "an", "the", "with", "from", "of", "as", "at", "for", "from", "in",
+                "on", "to", "but"
+            );
+            console.log("sortUniqWords: " + JSON.stringify(sortUniqWords));
+
+            $("#tags").autocomplete({
+                source: sortUniqWords
+            });
+        });
+
+        function compareIgnoringCase(a, b) {
+            a = a.toLowerCase(); b = b.toLowerCase();
+            if (a > b) return 1;
+            if (a < b) return -1;
+            return 0;
+        }
+
+        function stripTags(html) {
+            var tmp = document.createElement("DIV");
+            tmp.innerHTML = html;
+            return tmp.textContent || tmp.innerText || "";
+        }
+
+
+    </script>
+</body>
+</html>

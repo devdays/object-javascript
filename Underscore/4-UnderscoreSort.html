@@ -1,0 +1,29 @@
+﻿<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title>Underscore Find</title>
+</head>
+<body>
+    <script src="Scripts/underscore.js"></script>
+    <script src="Scripts/jquery-2.0.3.js"></script>
+    <script>
+        $.getJSON('Data/products.txt', function (data) {
+            var products = data.products;
+            console.log("products: " + JSON.stringify(products));
+
+            var sortedProducts = _.sortBy(products, 'name');
+
+            console.log("sortedProducts: " + JSON.stringify(sortedProducts));
+
+            var priceSort = _.sortBy(products, 'price') ;
+
+            console.log("priceSort: " + JSON.stringify(priceSort));
+
+            var priceReverseSort = _.sortBy(products, 'price').reverse();
+
+            console.log("priceReverseSort: " + JSON.stringify(priceReverseSort));
+
+        });
+    </script>
+</body>
+</html>

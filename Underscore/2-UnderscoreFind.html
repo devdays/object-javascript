@@ -1,0 +1,26 @@
+﻿<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title>Underscore Find</title>
+</head>
+<body>
+    <script src="Scripts/underscore.js"></script>
+    <script src="Scripts/jquery-2.0.3.js"></script>
+    <script>
+$.getJSON('Data/products.txt', function (data) {
+    var products = data.products;
+    console.log("products: " + JSON.stringify(products));
+
+    var doll = _.find(products, function (product) {
+        // underscore walks through each product and returns
+        // the first one found. 
+        console.log("product " + JSON.stringify(product));
+        return product.name === "Doll";
+    });
+
+    console.log("doll: " + JSON.stringify(doll));
+
+});
+    </script>
+</body>
+</html>

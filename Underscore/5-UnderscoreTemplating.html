@@ -1,0 +1,31 @@
+﻿<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title>Standard Template</title>
+</head>
+<body>
+    <h3>Products</h3>
+    <div id="productDiv"></div>
+    <script src="Scripts/underscore.js"></script>
+    <script src="Scripts/jquery-2.0.3.js"></script>
+    <script>
+        var template = "<ul>" +
+            "<% for (var index = 0; index < productsList.length; index++){ %>" +
+            "<% var product = productsList[index]; %>" +
+            "<% var tenPercentDiscount = product.price * .9; %>" +
+            "<li><span class='id'><%= product.id %></span> " +
+            "<span><strong><%= product.name %></strong></span><br/>" +
+            "<span>Product price = <%=product.price%>; " +
+            "Discount price = <%= tenPercentDiscount %></span><br/>" +
+            "<%=product.description%>" +
+            "<% } %>" +
+            "</ul>";
+        $.getJSON('Data/products.txt', function (data) {
+            var products = data.products;
+            var output = _.template(template, { productsList: products });
+            $("#productDiv").html(output);
+
+        });
+    </script>
+</body>
+</html>
