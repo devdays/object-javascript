@@ -1,0 +1,21 @@
+﻿<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title></title>
+</head>
+<body>
+     <div>
+            <h1>All Products</h1>
+            <div id="products"></div>
+        </div>
+    <script src="Scripts/jquery-2.0.3.js"></script>
+    <script src="Scripts/q.js"></script>
+    <script>
+        var qPromise = Q($.getJSON("data/products.txt"))
+            .then(function (products) {
+                $("#products").text(JSON.stringify(products));
+        });
+       
+    </script>
+</body>
+</html>
